@@ -78,7 +78,7 @@ section{padding:45px 0}
 .card{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:20px;box-shadow:0 4px 12px rgba(0,0,0,0.03)}
 .card h3{margin-top:0;color:var(--dark-navy)}
 
-/* শিক্ষকদের লিস্টের নতুন ডিজাইন */
+/* শিক্ষকদের নতুন লেআউটের ডিজাইন */
 .teacher-list-vertical {
   display: flex;
   flex-direction: column;
@@ -89,7 +89,7 @@ section{padding:45px 0}
 
 .teacher-card-row {
   display: flex;
-  justify-content: flex-end; /* একদম ডানপাশে নিয়ে যাবে */
+  justify-content: flex-end; /* উপাদানগুলোকে সম্পূর্ণ ডানে ঠেলে দেওয়া হয়েছে */
   align-items: center;
   background: #fff;
   border: 1px solid var(--border);
@@ -98,15 +98,16 @@ section{padding:45px 0}
   box-shadow: 0 2px 8px rgba(0,0,0,0.04);
 }
 
-/* ডানপাশের কন্টেইনার */
+/* ডানপাশের সীমানায় কন্টেইনার */
 .teacher-right-container {
   display: flex;
   flex-direction: column;
-  align-items: flex-end; /* উপাদানগুলোকে ডানপাশের শেষ মাথায় সারিবদ্ধ করবে */
-  width: 50%; /* বক্সের মোট দৈর্ঘ্য অর্ধেক করার জন্য */
+  align-items: flex-end; /* ছবি ও বক্স একদম ডান সীমানায় মিলিয়ে দেবে */
+  width: 50%;
+  margin-left: auto; /* বাম থেকে সম্পূর্ণ জায়গা ছেড়ে ডানে অবস্থান নেবে */
 }
 
-/* একদম ডানপাশের শেষ মাথায় বৃত্তাকার ফ্রেম */
+/* একদম ডানপাশের বৃত্তাকার ফ্রেম */
 .teacher-avatar-label {
   position: relative;
   width: 110px;
@@ -119,6 +120,7 @@ section{padding:45px 0}
   flex-shrink: 0;
   display: block;
   margin-bottom: 12px;
+  margin-right: 0; /* ডান প্রান্তে এলাইনড */
 }
 
 .teacher-avatar-label img {
@@ -146,15 +148,15 @@ section{padding:45px 0}
   display: none;
 }
 
-/* ছবির নিচে হাফ-লেন্থ টাইপিং বক্স */
+/* নাম ও পদবির টাইপিং বক্স */
 .teacher-info-box {
   width: 100%;
-  text-align: right; /* টাইপ করা লেখা ডানে থাকবে */
+  text-align: right;
 }
 
 .editable-text {
   outline: none;
-  padding: 4px 8px;
+  padding: 6px 10px;
   border-radius: 6px;
   transition: background 0.2s, border 0.2s;
   border: 1px dashed #cbd5e1;
@@ -162,6 +164,7 @@ section{padding:45px 0}
   margin-bottom: 6px;
   display: block;
   width: 100%;
+  text-align: right; /* টাইপ করা লেখা একদম ডানপাশ থেকে শুরু হবে */
 }
 
 .editable-text:hover {
@@ -197,8 +200,10 @@ footer{background:var(--dark-navy);color:#e2e8f0;padding:34px 0 15px}
   .title-center h1{font-size:22px}
   .navin a{font-size:13px;padding:8px}
   .teacher-card-row { justify-content: center; }
-  .teacher-right-container { width: 100%; align-items: center; }
+  .teacher-right-container { width: 100%; align-items: center; margin-left: 0; }
   .teacher-info-box { text-align: center; }
+  .editable-text { text-align: center; }
+  .teacher-avatar-label { margin-right: auto; margin-left: auto; }
 }
 </style>
 </head>
