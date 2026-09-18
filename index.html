@@ -78,31 +78,39 @@ section{padding:45px 0}
 .card{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:20px;box-shadow:0 4px 12px rgba(0,0,0,0.03)}
 .card h3{margin-top:0;color:var(--dark-navy)}
 
-/* শিক্ষকদের লিস্টের ডিজাইন */
+/* শিক্ষকদের নতুন লেআউটের ডিজাইন */
 .teacher-list-vertical {
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  max-width: 800px;
+  gap: 20px;
+  max-width: 850px;
   margin: 0 auto;
 }
 
 .teacher-card-row {
   display: flex;
+  justify-content: flex-end; /* ডানপাশে ফ্রেম ও তথ্য সারিবদ্ধ করবে */
   align-items: center;
-  gap: 20px;
   background: #fff;
   border: 1px solid var(--border);
   border-radius: 12px;
-  padding: 15px 20px;
+  padding: 20px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.04);
 }
 
-/* নিখুঁত বৃত্তাকার ক্লিক ফ্রেম */
+/* ডানপাশের কন্টেইনার */
+.teacher-right-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* ছবি ও নিচের বক্সগুলোকে সেন্টারে রাখবে */
+  width: 50%; /* বক্সের মোট দৈর্ঘ্য অর্ধেক করার জন্য */
+}
+
+/* ডানপাশের একদম শেষ মাথায় বৃত্তাকার ফ্রেম */
 .teacher-avatar-label {
   position: relative;
-  width: 100px;
-  height: 100px;
+  width: 110px;
+  height: 110px;
   border-radius: 50%;
   border: 3px solid var(--primary-blue);
   background: #f1f5f9;
@@ -110,6 +118,7 @@ section{padding:45px 0}
   overflow: hidden;
   flex-shrink: 0;
   display: block;
+  margin-bottom: 12px; /* ছবির নিচে জায়গা তৈরি করবে */
 }
 
 .teacher-avatar-label img {
@@ -137,22 +146,27 @@ section{padding:45px 0}
   display: none;
 }
 
-.teacher-info {
-  flex: 1;
+/* ছবির নিচের হাফ-লেন্থ টাইপিং বক্স */
+.teacher-info-box {
+  width: 100%; /* কন্টেইনারের পুরো ৫০% জায়গা নিবে */
+  text-align: center;
 }
 
-/* সরাসরি এডিট করার স্টাইল */
 .editable-text {
   outline: none;
-  padding: 2px 6px;
-  border-radius: 4px;
+  padding: 4px 8px;
+  border-radius: 6px;
   transition: background 0.2s, border 0.2s;
-  border: 1px dashed transparent;
+  border: 1px dashed #cbd5e1;
+  background: #fafafa;
+  margin-bottom: 6px;
+  display: block;
+  width: 100%;
 }
 
 .editable-text:hover {
   background: #f1f5f9;
-  border-color: #cbd5e1;
+  border-color: var(--primary-blue);
   cursor: text;
 }
 
@@ -162,14 +176,14 @@ section{padding:45px 0}
   box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
 }
 
-.teacher-info h3 {
-  margin: 0 0 4px;
-  font-size: 20px;
+.teacher-info-box h3 {
+  margin: 0 0 6px;
+  font-size: 18px;
   color: var(--dark-navy);
 }
 
-.teacher-info p {
-  margin: 0 0 4px;
+.teacher-info-box p {
+  margin: 0;
   color: var(--muted);
   font-size: 15px;
   font-weight: 500;
@@ -182,7 +196,8 @@ footer{background:var(--dark-navy);color:#e2e8f0;padding:34px 0 15px}
   .brand-container{flex-direction:column;text-align:center}
   .title-center h1{font-size:22px}
   .navin a{font-size:13px;padding:8px}
-  .teacher-card-row { flex-direction: column; text-align: center; }
+  .teacher-card-row { justify-content: center; }
+  .teacher-right-container { width: 100%; } /* মোবাইলে পুরো জায়গা ব্যবহার করবে */
 }
 </style>
 </head>
@@ -217,7 +232,7 @@ footer{background:var(--dark-navy);color:#e2e8f0;padding:34px 0 15px}
 <!-- ৮ জন শিক্ষকের সেকশন -->
 <section id="teachers"><div class="wrap">
   <h2 class="section-title">আমাদের সম্মানিত শিক্ষকবৃন্দ</h2>
-  <p class="section-sub">ছবি বদলাতে বৃত্তে ক্লিক করুন এবং নাম বা পদবি পরিবর্তন করতে সরাসরি লেখার ওপর ক্লিক করে লিখুন</p>
+  <p class="section-sub">ছবি বদলাতে ডানের বৃত্তে ক্লিক করুন এবং নাম/পদবি পরিবর্তন করতে নিচের বক্সে টাইপ করুন</p>
   
   <div id="teacherList" class="teacher-list-vertical">
     <!-- জাভাস্ক্রিপ্টের মাধ্যমে শিক্ষকের তালিকা জেনারেট হবে -->
@@ -257,13 +272,15 @@ const container = document.getElementById('teacherList');
 
 container.innerHTML = defaultTeachers.map(t => `
   <div class="teacher-card-row">
-    <label for="upload_${t.id}" class="teacher-avatar-label" title="ছবি পরিবর্তন করতে ক্লিক করুন">
-      <img id="img_${t.id}" src="${defaultAvatar}" alt="${t.name}">
-      <input type="file" id="upload_${t.id}" accept="image/*" onchange="previewTeacherImage(event, ${t.id})">
-    </label>
-    <div class="teacher-info">
-      <h3 contenteditable="true" class="editable-text" title="নাম পরিবর্তন করতে এখানে টাইপ করুন">${t.name}</h3>
-      <p contenteditable="true" class="editable-text" title="পদবি পরিবর্তন করতে এখানে টাইপ করুন">${t.role}</p>
+    <div class="teacher-right-container">
+      <label for="upload_${t.id}" class="teacher-avatar-label" title="ছবি পরিবর্তন করতে ক্লিক করুন">
+        <img id="img_${t.id}" src="${defaultAvatar}" alt="${t.name}">
+        <input type="file" id="upload_${t.id}" accept="image/*" onchange="previewTeacherImage(event, ${t.id})">
+      </label>
+      <div class="teacher-info-box">
+        <h3 contenteditable="true" class="editable-text" title="নাম পরিবর্তন করতে এখানে টাইপ করুন">${t.name}</h3>
+        <p contenteditable="true" class="editable-text" title="পদবি পরিবর্তন করতে এখানে টাইপ করুন">${t.role}</p>
+      </div>
     </div>
   </div>
 `).join('');
