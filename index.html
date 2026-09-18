@@ -78,7 +78,7 @@ section{padding:45px 0}
 .card{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:20px;box-shadow:0 4px 12px rgba(0,0,0,0.03)}
 .card h3{margin-top:0;color:var(--dark-navy)}
 
-/* শিক্ষকদের নতুন লেআউটের ডিজাইন */
+/* শিক্ষকদের লিস্টের নতুন ডিজাইন */
 .teacher-list-vertical {
   display: flex;
   flex-direction: column;
@@ -89,7 +89,7 @@ section{padding:45px 0}
 
 .teacher-card-row {
   display: flex;
-  justify-content: flex-end; /* ডানপাশে ফ্রেম ও তথ্য সারিবদ্ধ করবে */
+  justify-content: flex-end; /* একদম ডানপাশে নিয়ে যাবে */
   align-items: center;
   background: #fff;
   border: 1px solid var(--border);
@@ -102,11 +102,11 @@ section{padding:45px 0}
 .teacher-right-container {
   display: flex;
   flex-direction: column;
-  align-items: center; /* ছবি ও নিচের বক্সগুলোকে সেন্টারে রাখবে */
+  align-items: flex-end; /* উপাদানগুলোকে ডানপাশের শেষ মাথায় সারিবদ্ধ করবে */
   width: 50%; /* বক্সের মোট দৈর্ঘ্য অর্ধেক করার জন্য */
 }
 
-/* ডানপাশের একদম শেষ মাথায় বৃত্তাকার ফ্রেম */
+/* একদম ডানপাশের শেষ মাথায় বৃত্তাকার ফ্রেম */
 .teacher-avatar-label {
   position: relative;
   width: 110px;
@@ -118,7 +118,7 @@ section{padding:45px 0}
   overflow: hidden;
   flex-shrink: 0;
   display: block;
-  margin-bottom: 12px; /* ছবির নিচে জায়গা তৈরি করবে */
+  margin-bottom: 12px;
 }
 
 .teacher-avatar-label img {
@@ -146,10 +146,10 @@ section{padding:45px 0}
   display: none;
 }
 
-/* ছবির নিচের হাফ-লেন্থ টাইপিং বক্স */
+/* ছবির নিচে হাফ-লেন্থ টাইপিং বক্স */
 .teacher-info-box {
-  width: 100%; /* কন্টেইনারের পুরো ৫০% জায়গা নিবে */
-  text-align: center;
+  width: 100%;
+  text-align: right; /* টাইপ করা লেখা ডানে থাকবে */
 }
 
 .editable-text {
@@ -197,7 +197,8 @@ footer{background:var(--dark-navy);color:#e2e8f0;padding:34px 0 15px}
   .title-center h1{font-size:22px}
   .navin a{font-size:13px;padding:8px}
   .teacher-card-row { justify-content: center; }
-  .teacher-right-container { width: 100%; } /* মোবাইলে পুরো জায়গা ব্যবহার করবে */
+  .teacher-right-container { width: 100%; align-items: center; }
+  .teacher-info-box { text-align: center; }
 }
 </style>
 </head>
