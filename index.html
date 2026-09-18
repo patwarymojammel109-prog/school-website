@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="পশ্চিম ভাওয়াল সরকারি প্রাথমিক বিদ্যালয়, ফরিদগঞ্জ, চাঁদপুর">
+<meta name="robots" content="index, follow">
+<title>পশ্চিম ভাওয়াল সরকারি প্রাথমিক বিদ্যালয় | ফরিদগঞ্জ, চাঁদপুর</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --primary-blue: #2563eb;    
+  --teal-green: #059669;    
+  --amber-orange: #d97706;  
+  --carmine-red: #dc2626;   
+  --purple-violet: #7c3aed; 
+  --dark-navy: #0f2942;     
+  --light-bg: #f4f6f9;     
+  --card-bg: #ffffff;      
+  --border: #cbd5e1;
+  --text: #17221b;
+  --muted: #64748b;
+}
+
+*{box-sizing:border-box}
+body{margin:0;font-family:'Noto Sans Bengali',Arial,sans-serif;color:var(--text);background:var(--light-bg);line-height:1.7}
+a{text-decoration:none;color:inherit}
+
+header{background:#fff;border-bottom:2px solid var(--border);padding:15px 0}
+.brand-container{display:flex;align-items:center;justify-content:space-between;gap:15px}
+.school-logo, .govt-logo{width:85px;height:85px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.title-center{text-align:center;flex:1}
+.title-center h1{font-size:32px;line-height:1.2;margin:0;color:var(--dark-navy);font-weight:800}
+.title-center p{margin:5px 0 0;color:var(--muted);font-size:18px;font-weight:600}
+
+nav{background:#e2e8f0;position:sticky;top:0;z-index:20;box-shadow:0 3px 10px rgba(0,0,0,0.08)}
+.navin{display:flex;align-items:center;justify-content:center;gap:6px;overflow:auto;padding:5px 0}
+.navin a{padding:10px 14px;white-space:nowrap;font-size:15px;font-weight:700;border-radius:6px;transition:all 0.2s}
+
+.navin a:nth-child(5n+1){color:var(--primary-blue);}
+.navin a:nth-child(5n+2){color:var(--teal-green);}
+.navin a:nth-child(5n+3){color:var(--amber-orange);}
+.navin a:nth-child(5n+4){color:var(--carmine-red);}
+.navin a:nth-child(5n+5){color:var(--purple-violet);}
+
+.navin a:hover{background:#cbd5e1}
+
+.hero{background:linear-gradient(135deg, #1e3a8a, #2563eb);color:#fff;padding:60px 0;text-align:center}
+.hero-content{max-width:800px;margin:0 auto}
+.hero h2{font-size:38px;line-height:1.35;margin:0 0 15px;font-weight:800}
+.hero p{font-size:18px;margin:0 0 25px}
+
+.btn {
+  display: inline-block;
+  border: 0;
+  border-radius: 6px;
+  padding: 8px 16px;
+  cursor: pointer;
+  background: var(--primary-blue);
+  color: #fff;
+  font-weight: 700;
+  font-size: 14px;
+  transition: opacity 0.2s;
+  margin-top: 5px;
+}
+.btn:hover { opacity: 0.9; }
+.btn.warning { background: var(--amber-orange); color: #fff; }
+
+section{padding:45px 0}
+.section-title{text-align:center;margin:0 0 8px;font-size:30px;font-weight:800}
+.section-sub{text-align:center;color:var(--muted);margin:0 0 25px}
+
+#school .section-title{color:var(--primary-blue);}
+#teachers .section-title{color:var(--amber-orange);}
+
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:20px;box-shadow:0 4px 12px rgba(0,0,0,0.03)}
+.card h3{margin-top:0;color:var(--dark-navy)}
+
+/* শিক্ষকদের লিস্টের ডিজাইন */
+.teacher-list-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.teacher-card-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 15px 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+/* নিখুঁত বৃত্তাকার ক্লিক ফ্রেম */
+.teacher-avatar-label {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 3px solid var(--primary-blue);
+  background: #f1f5f9;
+  cursor: pointer;
+  overflow: hidden;
+  flex-shrink: 0;
+  display: block;
+}
+
+.teacher-avatar-label img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  border-radius: 50%;
+  display: block;
+}
+
+.teacher-avatar-label:hover::after {
+  content: '📷 ছবি বাছুন';
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 41, 66, 0.75);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.teacher-avatar-label input[type="file"] {
+  display: none;
+}
+
+.teacher-info {
+  flex: 1;
+}
+
+/* সরাসরি এডিট করার স্টাইল */
+.editable-text {
+  outline: none;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: background 0.2s, border 0.2s;
+  border: 1px dashed transparent;
+}
+
+.editable-text:hover {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+  cursor: text;
+}
+
+.editable-text:focus {
+  background: #fff;
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+}
+
+.teacher-info h3 {
+  margin: 0 0 4px;
+  font-size: 20px;
+  color: var(--dark-navy);
+}
+
+.teacher-info p {
+  margin: 0 0 4px;
+  color: var(--muted);
+  font-size: 15px;
+  font-weight: 500;
+}
+
+footer{background:var(--dark-navy);color:#e2e8f0;padding:34px 0 15px}
+.copyright{text-align:center;border-top:1px solid rgba(255,255,255,0.15);margin-top:25px;padding-top:15px;font-size:13px}
+
+@media(max-width:600px){
+  .brand-container{flex-direction:column;text-align:center}
+  .title-center h1{font-size:22px}
+  .navin a{font-size:13px;padding:8px}
+  .teacher-card-row { flex-direction: column; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap brand-container">
+    <div class="school-logo">
+      <img src="school-logo.png" alt="বিদ্যালয়ের লোগো" style="width:100%; height:100%; object-fit:contain;">
+    </div>
+    <div class="title-center">
+      <h1>পশ্চিম ভাওয়াল সরকারি প্রাথমিক বিদ্যালয়</h1>
+      <p>ফরিদগঞ্জ, চাঁদপুর</p>
+    </div>
+    <div class="govt-logo">
+     <img src="govt-logo.png" alt="সরকারি লোগো" style="width:100%; height:100%; object-fit:contain;">
+    </div>
+  </div>
+</header>
+
+<nav><div class="wrap navin">
+<a href="#home">প্রথম পাতা</a><a href="#teachers">শিক্ষকবৃন্দ</a><a href="#school">বিদ্যালয়ের তথ্য</a><a href="#contact">যোগাযোগ</a>
+</div></nav>
+
+<main id="home">
+<section class="hero"><div class="wrap hero-content">
+<h2>শিক্ষা, শৃঙ্খলা ও মানবিকতায় আলোকিত ভবিষ্যৎ</h2>
+<p>পশ্চিম ভাওয়াল সরকারি প্রাথমিক বিদ্যালয়ের অফিসিয়াল তথ্য ও অনলাইন তথ্যকেন্দ্রে স্বাগতম।</p>
+<a class="btn warning" href="#teachers">শিক্ষকবৃন্দকে দেখুন</a>
+</div></section>
+
+<!-- ৮ জন শিক্ষকের সেকশন -->
+<section id="teachers"><div class="wrap">
+  <h2 class="section-title">আমাদের সম্মানিত শিক্ষকবৃন্দ</h2>
+  <p class="section-sub">ছবি বদলাতে বৃত্তে ক্লিক করুন এবং নাম বা পদবি পরিবর্তন করতে সরাসরি লেখার ওপর ক্লিক করে লিখুন</p>
+  
+  <div id="teacherList" class="teacher-list-vertical">
+    <!-- জাভাস্ক্রিপ্টের মাধ্যমে শিক্ষকের তালিকা জেনারেট হবে -->
+  </div>
+</div></section>
+
+<section id="school" style="background:#edf2f7"><div class="wrap"><h2 class="section-title">বিদ্যালয়ের তথ্য</h2>
+<div class="grid">
+<div class="card"><h3>বিদ্যালয়ের ইতিহাস</h3><p id="history">এখানে বিদ্যালয়ের প্রতিষ্ঠার ইতিহাস, ঐতিহ্য ও সংক্ষিপ্ত পরিচিতি লিখুন।</p></div>
+<div class="card"><h3>প্রধান শিক্ষকের বাণী</h3><p id="headMessage">শিক্ষার্থীদের সুন্দর ভবিষ্যৎ গঠনে বিদ্যালয়, শিক্ষক ও অভিভাবকের সম্মিলিত প্রচেষ্টা অত্যন্ত গুরুত্বপূর্ণ।</p></div>
+<div class="card"><h3>আমাদের লক্ষ্য</h3><p>মানসম্মত প্রাথমিক শিক্ষা, নৈতিক মূল্যবোধ ও সৃজনশীলতার বিকাশ নিশ্চিত করা।</p></div>
+</div></div></section>
+
+<section id="contact"><div class="wrap"><h2 class="section-title">যোগাযোগ</h2><div class="grid">
+<div class="card"><h3>বিদ্যালয়ের ঠিকানা</h3><p>পশ্চিম ভাওয়াল সরকারি প্রাথমিক বিদ্যালয়<br>ফরিদগঞ্জ, চাঁদপুর, বাংলাদেশ</p></div>
+<div class="card"><h3>গুরুত্বপূর্ণ লিংক</h3><p><a href="https://dpe.gov.bd/" target="_blank">প্রাথমিক শিক্ষা অধিদপ্তর</a><br><a href="https://mopme.gov.bd/" target="_blank">প্রাথমিক ও গণশিক্ষা মন্ত্রণালয়</a></p></div>
+</div></div></section>
+</main>
+
+<footer><div class="wrap copyright">© <span id="year"></span> পশ্চিম ভাওয়াল সরকারি প্রাথমিক বিদ্যালয় | সর্বস্বত্ব সংরক্ষিত</div></footer>
+
+<script>
+const defaultTeachers = [
+  { id: 1, name: "শিক্ষকের নাম ১", role: "প্রধান শিক্ষক" },
+  { id: 2, name: "শিক্ষকের নাম ২", role: "সহকারী শিক্ষক" },
+  { id: 3, name: "শিক্ষকের নাম ৩", role: "সহকারী শিক্ষক" },
+  { id: 4, name: "শিক্ষকের নাম ৪", role: "সহকারী শিক্ষক" },
+  { id: 5, name: "শিক্ষকের নাম ৫", role: "সহকারী শিক্ষক" },
+  { id: 6, name: "শিক্ষকের নাম ৬", role: "সহকারী শিক্ষক" },
+  { id: 7, name: "শিক্ষকের নাম ৭", role: "সহকারী শিক্ষক" },
+  { id: 8, name: "শিক্ষকের নাম ৮", role: "সহকারী শিক্ষক" }
+];
+
+const defaultAvatar = `data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><circle cx="50" cy="50" r="48" fill="%23e2e8f0"/><text x="50%" y="55%" text-anchor="middle" font-size="35">👤</text></svg>`;
+
+const container = document.getElementById('teacherList');
+
+container.innerHTML = defaultTeachers.map(t => `
+  <div class="teacher-card-row">
+    <label for="upload_${t.id}" class="teacher-avatar-label" title="ছবি পরিবর্তন করতে ক্লিক করুন">
+      <img id="img_${t.id}" src="${defaultAvatar}" alt="${t.name}">
+      <input type="file" id="upload_${t.id}" accept="image/*" onchange="previewTeacherImage(event, ${t.id})">
+    </label>
+    <div class="teacher-info">
+      <h3 contenteditable="true" class="editable-text" title="নাম পরিবর্তন করতে এখানে টাইপ করুন">${t.name}</h3>
+      <p contenteditable="true" class="editable-text" title="পদবি পরিবর্তন করতে এখানে টাইপ করুন">${t.role}</p>
+    </div>
+  </div>
+`).join('');
+
+function previewTeacherImage(event, id) {
+  const file = event.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      document.getElementById(`img_${id}`).src = e.target.result;
+    }
+    reader.readAsDataURL(file);
+  }
+}
+
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
