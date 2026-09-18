@@ -78,17 +78,33 @@ section{padding:45px 0}
 .section-sub{text-align:center;color:var(--muted);margin:0 0 25px}
 
 #school .section-title{color:var(--primary-blue);}
-#teachers .section-title{color:var(--amber-orange);}
+
+/* শিক্ষক সেকশনের শিরোনাম ডানের বক্স বরাবর নিয়ে আসার সিএসএস */
+#teachers .section-title{
+  color: var(--amber-orange);
+  text-align: right;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: 0;
+}
+
+#teachers .section-sub{
+  text-align: right;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: 0;
+  margin-bottom: 25px;
+}
 
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .card{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:20px;box-shadow:0 4px 12px rgba(0,0,0,0.03)}
 .card h3{margin-top:0;color:var(--dark-navy)}
 
-/* সাদা পুরো বক্সটি একদম ডানপাশে সরাবার সিএসএস */
+/* শিক্ষক সেকশনের কার্ড ডানে নেয়ার সিএসএস */
 .teacher-list-vertical {
   display: flex;
   flex-direction: column;
-  align-items: flex-end; /* পুরো সাদা কার্ড বক্সগুলোকে ডানের শেষ মাথায় নিয়ে যাবে */
+  align-items: flex-end;
   gap: 20px;
   width: 100%;
 }
@@ -103,7 +119,7 @@ section{padding:45px 0}
   padding: 24px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.04);
   width: 100%;
-  max-width: 500px; /* প্রয়োজন অনুযায়ী সাদা বক্সটির সাইজ ছোট-বড় করতে পারবেন */
+  max-width: 500px;
 }
 
 .teacher-right-container {
@@ -191,6 +207,7 @@ footer{background:var(--dark-navy);color:#e2e8f0;padding:34px 0 15px}
   .brand-container{flex-direction:column;text-align:center}
   .title-center h1{font-size:22px}
   .navin a{font-size:13px;padding:8px}
+  #teachers .section-title, #teachers .section-sub { text-align: center; max-width: 100%; }
   .teacher-list-vertical { align-items: center; }
   .teacher-card-row { justify-content: center; max-width: 100%; }
   .teacher-right-container { align-items: center; }
