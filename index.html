@@ -11,46 +11,36 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
-  // আপনার Supabase সেটআপ
+  // Supabase সেটআপ
   const SUPABASE_URL = "https://mrodmdztahvekbcvcnpv.supabase.co";
   const SUPABASE_KEY = "sb_publishable_GpBlM9aiibdf9pKfIkHFDA_gEOOMBTd";
   
   const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-  // Supabase Storage-এ ফাইল আপলোড ফাংশন
+  // Supabase Storage-এ ফাইল আপলোড করার ফাংশন
   async function uploadFileToSupabase(inputElement, callback) {
     const file = inputElement.files[0];
     if (!file) return;
 
     try {
       alert('ফাইল আপলোড হচ্ছে, অনুগ্রহ করে অপেক্ষা করুন...');
-      
-      // ফাইলের নাম ইউনিক করার জন্য টাইমস্ট্যাম্প যোগ করা হচ্ছে
       const fileName = `${Date.now()}_${file.name}`;
       
-      // 'school-files' বাক্যাটে আপলোড
       const { data, error } = await supabaseClient
         .storage
         .from('school-files')
-        .upload(fileName, file, {
-          cacheControl: '3600',
-          upsert: false
-        });
+        .upload(fileName, file, { cacheControl: '3600', upsert: false });
 
-      if (error) {
-        throw error;
-      }
+      if (error) throw error;
 
-      // পাবলিক URL সংগ্রহ
       const { data: urlData } = supabaseClient
         .storage
         .from('school-files')
         .getPublicUrl(fileName);
 
       const publicUrl = urlData.publicUrl;
-      alert('ফাইল সফলভাবে আপলোড হয়েছে!\n\nলিংক: ' + publicUrl);
-      console.log('Uploaded File URL:', publicUrl);
-
+      alert('ফাইল সফলভাবে আপলোড হয়েছে!');
+      
       if (callback && typeof callback === 'function') {
         callback(publicUrl);
       }
@@ -82,12 +72,7 @@
 body{margin:0;font-family:'Noto Sans Bengali',Arial,sans-serif;color:var(--text);background:var(--light-bg);line-height:1.7}
 a{text-decoration:none;color:inherit}
 
-.wrap {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 15px;
-}
-
+.wrap { max-width: 1100px; margin: 0 auto; padding: 0 15px; }
 header{background:#fff;border-bottom:2px solid var(--border);padding:15px 0}
 .brand-container{display:flex;align-items:center;justify-content:space-between;gap:15px}
 .school-logo, .govt-logo{width:85px;height:85px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
@@ -98,38 +83,26 @@ header{background:#fff;border-bottom:2px solid var(--border);padding:15px 0}
 nav{background:#e2e8f0;position:sticky;top:0;z-index:20;box-shadow:0 3px 10px rgba(0,0,0,0.08)}
 .navin{display:flex;align-items:center;justify-content:center;gap:6px;overflow:auto;padding:5px 0}
 .navin a{padding:10px 14px;white-space:nowrap;font-size:15px;font-weight:700;border-radius:6px;transition:all 0.2s}
-
 .navin a:nth-child(5n+1){color:var(--primary-blue);}
 .navin a:nth-child(5n+2){color:var(--teal-green);}
 .navin a:nth-child(5n+3){color:var(--amber-orange);}
 .navin a:nth-child(5n+4){color:var(--carmine-red);}
 .navin a:nth-child(5n+5){color:var(--purple-violet);}
-
 .navin a:hover{background:#cbd5e1}
 
 .hero{
   background: linear-gradient(rgba(15, 41, 66, 0.55), rgba(37, 99, 235, 0.55)), 
               url('school-building.jpg') center/cover no-repeat;
-  color:#fff;
-  padding:90px 0;
-  text-align:center;
+  color:#fff; padding:90px 0; text-align:center;
 }
 .hero-content{max-width:800px;margin:0 auto}
 .hero h2{font-size:38px;line-height:1.35;margin:0 0 15px;font-weight:800; text-shadow: 0 2px 4px rgba(0,0,0,0.6);}
 .hero p{font-size:18px;margin:0 0 25px; text-shadow: 0 1px 3px rgba(0,0,0,0.6);}
 
 .btn {
-  display: inline-block;
-  border: 0;
-  border-radius: 6px;
-  padding: 8px 16px;
-  cursor: pointer;
-  background: var(--primary-blue);
-  color: #fff;
-  font-weight: 700;
-  font-size: 14px;
-  transition: opacity 0.2s;
-  margin-top: 5px;
+  display: inline-block; border: 0; border-radius: 6px; padding: 8px 16px; cursor: pointer;
+  background: var(--primary-blue); color: #fff; font-weight: 700; font-size: 14px;
+  transition: opacity 0.2s; margin-top: 5px;
 }
 .btn:hover { opacity: 0.9; }
 .btn.warning { background: var(--amber-orange); color: #fff; }
@@ -138,203 +111,41 @@ section{padding:45px 0}
 .section-title{margin:0 0 8px;font-size:28px;font-weight:800}
 .section-sub{color:var(--muted);margin:0 0 25px}
 
-.main-portal-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 25px;
-}
+.main-portal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
+.sidebar-left { display: flex; flex-direction: column; gap: 20px; }
+.portal-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
+.portal-box h3 { margin-top: 0; margin-bottom: 15px; color: var(--dark-navy); border-bottom: 2px solid var(--primary-blue); padding-bottom: 8px; font-size: 20px; }
 
-.sidebar-left {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
+.notice-list { list-style: none; padding: 0; margin: 0; }
+.notice-item { background: #f8fafc; border-left: 4px solid var(--primary-blue); padding: 10px 12px; margin-bottom: 10px; border-radius: 4px; }
+.notice-item small { color: var(--muted); display: block; }
 
-.portal-box {
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-}
-
-.portal-box h3 {
-  margin-top: 0;
-  margin-bottom: 15px;
-  color: var(--dark-navy);
-  border-bottom: 2px solid var(--primary-blue);
-  padding-bottom: 8px;
-  font-size: 20px;
-}
-
-.notice-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.notice-item {
-  background: #f8fafc;
-  border-left: 4px solid var(--primary-blue);
-  padding: 10px 12px;
-  margin-bottom: 10px;
-  border-radius: 4px;
-}
-
-.notice-item small {
-  color: var(--muted);
-  display: block;
-}
-
-.student-stats-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-  text-align: center;
-}
-
-.stat-card {
-  background: #f1f5f9;
-  padding: 12px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-}
-
+.student-stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; text-align: center; }
+.stat-card { background: #f1f5f9; padding: 12px; border-radius: 8px; border: 1px solid var(--border); }
 .stat-card h4 { margin: 0; font-size: 14px; color: var(--muted); }
-.stat-card span { font-size: 20px; font-weight: bold; color: var(--dark-navy); }
+.stat-card span { font-size: 20px; font-weight: bold; color: var(--dark-navy); outline: none; }
 
-details {
-  background: #f8fafc;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  margin-bottom: 8px;
-  padding: 8px 12px;
-}
+details { background: #f8fafc; border: 1px solid var(--border); border-radius: 6px; margin-bottom: 8px; padding: 8px 12px; }
+summary { font-weight: 700; cursor: pointer; color: var(--dark-navy); }
+.class-content { padding-top: 10px; font-size: 14px; }
+.upload-input { margin-top: 8px; font-size: 12px; width: 100%; }
+.url-input { width: 100%; padding: 6px; margin-top: 6px; border: 1px solid var(--border); border-radius: 4px; font-size: 13px; }
 
-summary {
-  font-weight: 700;
-  cursor: pointer;
-  color: var(--dark-navy);
-}
-
-.class-content {
-  padding-top: 10px;
-  font-size: 14px;
-}
-
-.upload-input {
-  margin-top: 8px;
-  font-size: 12px;
-  width: 100%;
-}
-
-.url-input {
-  width: 100%;
-  padding: 6px;
-  margin-top: 6px;
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  font-size: 13px;
-}
-
-.teacher-list-vertical {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  width: 100%;
-}
-
-.teacher-card-row {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  background: #fff;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 24px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-  width: 100%;
-}
-
-.teacher-right-container {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  width: 100%;
-}
-
-.teacher-avatar-label {
-  position: relative;
-  width: 110px;
-  height: 110px;
-  border-radius: 50%;
-  border: 3px solid var(--primary-blue);
-  background: #f1f5f9;
-  cursor: pointer;
-  overflow: hidden;
-  flex-shrink: 0;
-  display: block;
-  margin-bottom: 12px;
-}
-
-.teacher-avatar-label img {
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
-  border-radius: 50%;
-  display: block;
-}
-
-.teacher-avatar-label:hover::after {
-  content: '📷 ছবি বাছুন';
-  position: absolute;
-  inset: 0;
-  background: rgba(15, 41, 66, 0.75);
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 11px;
-  font-weight: bold;
-}
-
+.teacher-list-vertical { display: flex; flex-direction: column; gap: 20px; width: 100%; }
+.teacher-card-row { display: flex; justify-content: flex-end; align-items: center; background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); width: 100%; }
+.teacher-right-container { display: flex; flex-direction: column; align-items: flex-end; width: 100%; }
+.teacher-avatar-label { position: relative; width: 110px; height: 110px; border-radius: 50%; border: 3px solid var(--primary-blue); background: #f1f5f9; cursor: pointer; overflow: hidden; flex-shrink: 0; display: block; margin-bottom: 12px; }
+.teacher-avatar-label img { width: 100% !important; height: 100% !important; object-fit: cover !important; border-radius: 50%; display: block; }
+.teacher-avatar-label:hover::after { content: '📷 ছবি বাছুন'; position: absolute; inset: 0; background: rgba(15, 41, 66, 0.75); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: bold; }
 .teacher-avatar-label input[type="file"] { display: none; }
 
-.teacher-info-box {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
-
-.editable-text {
-  outline: none;
-  padding: 6px 12px;
-  border-radius: 6px;
-  transition: background 0.2s, border 0.2s;
-  border: 1px dashed #cbd5e1;
-  background: #fafafa;
-  margin-bottom: 6px;
-  display: block;
-  width: 100%;
-  text-align: right;
-}
-
+.teacher-info-box { width: 100%; display: flex; flex-direction: column; align-items: flex-end; }
+.editable-text { outline: none; padding: 6px 12px; border-radius: 6px; transition: background 0.2s, border 0.2s; border: 1px dashed #cbd5e1; background: #fafafa; margin-bottom: 6px; display: block; width: 100%; text-align: right; }
 .editable-text:hover { background: #f1f5f9; border-color: var(--primary-blue); }
 .editable-text:focus { background: #fff; border-color: var(--primary-blue); box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2); }
 
-.info-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 14px;
-}
-
-.info-table th, .info-table td {
-  border: 1px solid var(--border);
-  padding: 8px;
-  text-align: right;
-}
-
+.info-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.info-table th, .info-table td { border: 1px solid var(--border); padding: 8px; text-align: right; }
 .info-table th { background: #f1f5f9; }
 
 footer{background:var(--dark-navy);color:#e2e8f0;padding:34px 0 15px}
@@ -354,16 +165,12 @@ footer{background:var(--dark-navy);color:#e2e8f0;padding:34px 0 15px}
 
 <header>
   <div class="wrap brand-container">
-    <div class="school-logo">
-      <img src="school-logo.png" alt="বিদ্যালয়ের লোগো" style="width:100%; height:100%; object-fit:contain;">
-    </div>
+    <div class="school-logo"><img src="school-logo.png" alt="বিদ্যালয়ের লোগো" style="width:100%; height:100%; object-fit:contain;"></div>
     <div class="title-center">
       <h1>পশ্চিম ভাওয়াল সরকারি প্রাথমিক বিদ্যালয়</h1>
       <p>ফরিদগঞ্জ, চাঁদপুর</p>
     </div>
-    <div class="govt-logo">
-     <img src="govt-logo.png" alt="সরকারি লোগো" style="width:100%; height:100%; object-fit:contain;">
-    </div>
+    <div class="govt-logo"><img src="govt-logo.png" alt="সরকারি লোগো" style="width:100%; height:100%; object-fit:contain;"></div>
   </div>
 </header>
 
@@ -397,10 +204,10 @@ footer{background:var(--dark-navy);color:#e2e8f0;padding:34px 0 15px}
       <div class="portal-box">
         <h3>📊 মোট শিক্ষার্থীর বিবরণ</h3>
         <div class="student-stats-grid">
-          <div class="stat-card"><h4>মোট শিক্ষার্থী</h4><span>১৫০</span></div>
-          <div class="stat-card"><h4>ছাত্র (ছেলে)</h4><span>৭৫</span></div>
-          <div class="stat-card"><h4>ছাত্রী (মেয়ে)</h4><span>৭০</span></div>
-          <div class="stat-card"><h4>বিশেষ চাহিদা সম্পন্ন</h4><span>০৫</span></div>
+          <div class="stat-card"><h4>মোট শিক্ষার্থী</h4><span id="stat_total" contenteditable="true" onblur="saveStudentStats()">১৫০</span></div>
+          <div class="stat-card"><h4>ছাত্র (ছেলে)</h4><span id="stat_boys" contenteditable="true" onblur="saveStudentStats()">৭৫</span></div>
+          <div class="stat-card"><h4>ছাত্রী (মেয়ে)</h4><span id="stat_girls" contenteditable="true" onblur="saveStudentStats()">৭০</span></div>
+          <div class="stat-card"><h4>বিশেষ চাহিদা সম্পন্ন</h4><span id="stat_special" contenteditable="true" onblur="saveStudentStats()">০৫</span></div>
         </div>
       </div>
 
@@ -434,9 +241,7 @@ footer{background:var(--dark-navy);color:#e2e8f0;padding:34px 0 15px}
       <div class="portal-box">
         <h3>🏛️ সভাপতিগণের তালিকা</h3>
         <table class="info-table">
-          <thead>
-            <tr><th>নাম</th><th>মেয়াদকাল</th></tr>
-          </thead>
+          <thead><tr><th>নাম</th><th>মেয়াদকাল</th></tr></thead>
           <tbody>
             <tr><td>নাম এখানে লিখুন</td><td>২০২৪ - বর্তমান</td></tr>
             <tr><td>প্রাক্তন সভাপতির নাম</td><td>২০২০ - ২০২৪</td></tr>
@@ -470,10 +275,11 @@ footer{background:var(--dark-navy);color:#e2e8f0;padding:34px 0 15px}
 
     <div>
       <h2 class="section-title" style="text-align:right; color:var(--amber-orange);">আমাদের সম্মানিত শিক্ষকবৃন্দ</h2>
-      <p class="section-sub" style="text-align:right;">ছবি ও তথ্য পরিবর্তনযোগ্য</p>
+      <p class="section-sub" style="text-align:right;">ছবি ও তথ্য পরিবর্তনযোগ্য (ডাটাবেজে সেভ হবে)</p>
       
       <div id="teacherList" class="teacher-list-vertical">
       </div>
+      <button class="btn" onclick="addTeacherCard()" style="float: right; margin-top: 15px;">+ নতুন শিক্ষক যোগ করুন</button>
     </div>
 
   </div>
@@ -495,48 +301,120 @@ footer{background:var(--dark-navy);color:#e2e8f0;padding:34px 0 15px}
 <footer><div class="wrap copyright">© <span id="year"></span> পশ্চিম ভাওয়াল সরকারি প্রাথমিক বিদ্যালয় | সর্বস্বত্ব সংরক্ষিত</div></footer>
 
 <script>
-const defaultTeachers = [
-  { id: 1, name: "শিক্ষকের নাম ১", role: "প্রধান শিক্ষক" },
-  { id: 2, name: "শিক্ষকের নাম ২", role: "সহকারী শিক্ষক" },
-  { id: 3, name: "শিক্ষকের নাম ৩", role: "সহকারী শিক্ষক" },
-  { id: 4, name: "শিক্ষকের নাম ৪", role: "সহকারী শিক্ষক" },
-  { id: 5, name: "শিক্ষকের নাম ৫", role: "সহকারী শিক্ষক" },
-  { id: 6, name: "শিক্ষকের নাম ৬", role: "সহকারী শিক্ষক" },
-  { id: 7, name: "শিক্ষকের নাম ৭", role: "সহকারী শিক্ষক" },
-  { id: 8, name: "শিক্ষকের নাম ৮", role: "সহকারী শিক্ষক" }
-];
-
 const defaultAvatar = `data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><circle cx="50" cy="50" r="48" fill="%23e2e8f0"/><text x="50%" y="55%" text-anchor="middle" font-size="35">👤</text></svg>`;
 
-const container = document.getElementById('teacherList');
+// ১. ডাটাবেজ থেকে শিক্ষকদের তালিকা লোড করা
+async function fetchTeachers() {
+  const container = document.getElementById('teacherList');
+  const { data: teachers, error } = await supabaseClient
+    .from('teachers')
+    .select('*')
+    .order('id', { ascending: true });
 
-container.innerHTML = defaultTeachers.map(t => `
-  <div class="teacher-card-row">
-    <div class="teacher-right-container">
-      <label for="upload_${t.id}" class="teacher-avatar-label" title="ছবি পরিবর্তন করতে ক্লিক করুন">
-        <img id="img_${t.id}" src="${defaultAvatar}" alt="${t.name}">
-        <input type="file" id="upload_${t.id}" accept="image/*" onchange="previewTeacherImage(event, ${t.id})">
-      </label>
-      <div class="teacher-info-box">
-        <h3 contenteditable="true" class="editable-text" title="নাম পরিবর্তন করতে এখানে টাইপ করুন">${t.name}</h3>
-        <p contenteditable="true" class="editable-text" title="পদবি পরিবর্তন করতে এখানে টাইপ করুন">${t.role}</p>
+  if (error || !teachers || teachers.length === 0) {
+    container.innerHTML = `<p style="text-align:right;">কোনো শিক্ষকের তথ্য পাওয়া যায়নি। নিচের বোতাম চেপে শিক্ষক যোগ করুন।</p>`;
+    return;
+  }
+
+  container.innerHTML = teachers.map(t => `
+    <div class="teacher-card-row" id="teacher_card_${t.id}">
+      <div class="teacher-right-container">
+        <label for="upload_${t.id}" class="teacher-avatar-label" title="ছবি পরিবর্তন করতে ক্লিক করুন">
+          <img id="img_${t.id}" src="${t['image-url'] || t.image_url || defaultAvatar}" alt="${t.name}">
+          <input type="file" id="upload_${t.id}" accept="image/*" onchange="previewTeacherImage(event, ${t.id})">
+        </label>
+        <div class="teacher-info-box">
+          <h3 contenteditable="true" class="editable-text" id="name_${t.id}" onblur="saveTeacherData(${t.id})" title="নাম পরিবর্তন করে বাইরে ক্লিক করুন">${t.name || 'শিক্ষকের নাম'}</h3>
+          <p contenteditable="true" class="editable-text" id="desig_${t.id}" onblur="saveTeacherData(${t.id})" title="পদবি পরিবর্তন করে বাইরে ক্লিক করুন">${t.designation || 'সহকারী শিক্ষক'}</p>
+        </div>
       </div>
     </div>
-  </div>
-`).join('');
+  `).join('');
+}
 
+// ২. শিক্ষকের নাম/পদবি পরিবর্তন হলে ডাটাবেজে সেভ করা
+async function saveTeacherData(id) {
+  const name = document.getElementById(`name_${id}`).innerText.trim();
+  const designation = document.getElementById(`desig_${id}`).innerText.trim();
+
+  const { error } = await supabaseClient
+    .from('teachers')
+    .update({ name: name, designation: designation })
+    .eq('id', id);
+
+  if (error) console.error('Save error:', error.message);
+}
+
+// ৩. শিক্ষকের ছবি পরিবর্তন করে ডাটাবেজে সেভ করা
 function previewTeacherImage(event, id) {
   const fileInput = event.target;
   if (fileInput.files && fileInput.files[0]) {
-    uploadFileToSupabase(fileInput, function(uploadedUrl) {
+    uploadFileToSupabase(fileInput, async function(uploadedUrl) {
       if (uploadedUrl) {
         document.getElementById(`img_${id}`).src = uploadedUrl;
+        
+        // ডাটাবেজে ছবির URL আপডেট
+        await supabaseClient
+          .from('teachers')
+          .update({ 'image-url': uploadedUrl })
+          .eq('id', id);
       }
     });
   }
 }
 
-document.getElementById('year').textContent = new Date().getFullYear();
+// ৪. নতুন শিক্ষক যুক্ত করা
+async function addTeacherCard() {
+  const { data, error } = await supabaseClient
+    .from('teachers')
+    .insert([{ name: 'নতুন শিক্ষক', designation: 'সহকারী শিক্ষক' }])
+    .select();
+
+  if (!error) {
+    fetchTeachers();
+  } else {
+    alert('শিক্ষক যোগ করতে সমস্যা হয়েছে: ' + error.message);
+  }
+}
+
+// ৫. শিক্ষার্থীর পরিসংখ্যান ডাটাবেজে সেভ করা
+async function saveStudentStats() {
+  const total = parseInt(document.getElementById('stat_total').innerText) || 0;
+  const boys = parseInt(document.getElementById('stat_boys').innerText) || 0;
+  const girls = parseInt(document.getElementById('stat_girls').innerText) || 0;
+  const special = parseInt(document.getElementById('stat_special').innerText) || 0;
+
+  const { data } = await supabaseClient.from('school_information').select('id');
+  
+  if (data && data.length > 0) {
+    await supabaseClient
+      .from('school_information')
+      .update({ total_students: total, boys: boys, girls: girls, special_needs: special })
+      .eq('id', data[0].id);
+  } else {
+    await supabaseClient
+      .from('school_information')
+      .insert([{ total_students: total, boys: boys, girls: girls, special_needs: special }]);
+  }
+}
+
+// ৬. শিক্ষার্থীর পরিসংখ্যান ডাটাবেজ থেকে লোড করা
+async function fetchStudentStats() {
+  const { data, error } = await supabaseClient.from('school_information').select('*').limit(1);
+  if (data && data.length > 0) {
+    document.getElementById('stat_total').innerText = data[0].total_students || 0;
+    document.getElementById('stat_boys').innerText = data[0].boys || 0;
+    document.getElementById('stat_girls').innerText = data[0].girls || 0;
+    document.getElementById('stat_special').innerText = data[0].special_needs || 0;
+  }
+}
+
+// পেজ লোড হওয়ার সময় কাজগুলো শুরু হবে
+window.onload = function() {
+  fetchTeachers();
+  fetchStudentStats();
+  document.getElementById('year').textContent = new Date().getFullYear();
+};
 </script>
 </body>
 </html>
