@@ -7,26 +7,27 @@
 <meta name="robots" content="index, follow">
 <title>পশ্চিম ভাওয়াল সরকারি প্রাথমিক বিদ্যালয় | ফরিদগঞ্জ, চাঁদপুর</title>
 
-<!-- Firebase SDKs -->
+<!-- Firebase SDKs (Compat Version) -->
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-storage-compat.js"></script>
 
 <script>
-  // 1. Firebase Console থেকে পাওয়া কনফিগারেশন সেট করুন
+  // আপনার ফায়ারবেইস কনফিগারেশন
   const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_PROJECT_ID.appspot.com",
-    messagingSenderId: "YOUR_SENDER_ID",
-    appId: "YOUR_APP_ID"
+    apiKey: "AIzaSyBbCW-yIKwaORaX0rJ2Zrn-8MsNpnuCyyE",
+    authDomain: "school-website-ca55a.firebaseapp.com",
+    projectId: "school-website-ca55a",
+    storageBucket: "school-website-ca55a.firebasestorage.app",
+    messagingSenderId: "887690099528",
+    appId: "1:887690099528:web:e9e61500d2a44664aad17d",
+    measurementId: "G-1PS5FK01JG"
   };
 
-  // 2. Firebase ইনিশিয়ালাইজ করুন
+  // Firebase ইনিশিয়ালাইজ করুন
   firebase.initializeApp(firebaseConfig);
   const storage = firebase.storage();
 
-  // 3. ফাইল আপলোড করার ফাংশন
+  // ফাইল আপলোড করার ফাংশন
   function uploadFileToFirebase(inputElement) {
     const file = inputElement.files[0];
     if (!file) return;
@@ -522,9 +523,7 @@ container.innerHTML = defaultTeachers.map(t => `
 function previewTeacherImage(event, id) {
   const file = event.target.files[0];
   if (file) {
-    // শিক্ষকদের ছবিও ফায়ারবেইসে আপলোড করতে চাইলে নিচের ফাংশন ব্যবহার করতে পারেন
     uploadFileToFirebase(event.target);
-    
     const reader = new FileReader();
     reader.onload = function(e) {
       document.getElementById(`img_${id}`).src = e.target.result;
